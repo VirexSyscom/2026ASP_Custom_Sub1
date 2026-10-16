@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: ReDeployAgentPool
+  name: DevOps_Workload_Agent_Pool
 
 
 steps:
