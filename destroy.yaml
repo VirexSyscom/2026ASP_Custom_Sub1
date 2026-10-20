@@ -1,0 +1,44 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  name: DevOps_Connectivity_Agent_Pool
+
+
+steps:
+- task: TerraformTask@5
+  displayName: terraform init
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendAzureRmUseEntraIdForAuthentication: false
+    backendServiceArm: 'ARM_Connectivity'
+    backendAzureRmOverrideSubscriptionID: '$(SubID)'
+    backendAzureRmResourceGroupName: '$(SARG)'
+    backendAzureRmStorageAccountName: '$(SAName)'
+    backendAzureRmContainerName: '$(CName)'
+#    backendAzureRmKey: '$(SAKey)'
+    backendAzureRmKey: 'workload.tfstate'
+
+- task: TerraformTask@5
+  displayName: terraform plan
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    commandOptions: '-destroy -out=destroy.tfplan'
+    environmentServiceNameAzureRM: 'ARM_Workload'
+    environmentAzureRmOverrideSubscriptionID: '$(SubID)'
+
+
+- task: TerraformTask@5
+  displayName: terraform destory
+  inputs:
+    provider: 'azurerm'
+    command: 'destroy'    
+    commandOptions: '-auto-approve'
+    environmentServiceNameAzureRM: 'ARM_Workload'
