@@ -26,6 +26,8 @@ terraform {
       version = "~> 2.0"
     }
   }
+
+  backend "azurerm" {}
 }
 
 # subscription_id 留 null 時，provider 會自動採用 Azure DevOps
