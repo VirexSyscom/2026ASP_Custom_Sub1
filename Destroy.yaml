@@ -17,7 +17,7 @@ steps:
     provider: 'azurerm'
     command: 'init'
     backendAzureRmUseEntraIdForAuthentication: false
-    backendServiceArm: 'ARM_Connectivity'
+    backendServiceArm: 'ARM_Workload'
     backendAzureRmOverrideSubscriptionID: '$(SubID)'
     backendAzureRmResourceGroupName: '$(SARG)'
     backendAzureRmStorageAccountName: '$(SAName)'
