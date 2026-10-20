@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: DevOps_Connectivity_Agent_Pool
+  name: DevOps_Workload_Agent_Pool
 
 
 steps:
